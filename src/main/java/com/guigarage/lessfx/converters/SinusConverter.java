@@ -21,6 +21,9 @@ public class SinusConverter extends StyleConverter<String, Number> {
         Pattern pattern = Pattern.compile("^sin\\((-?[0-9]*\\.?[0-9]*)(deg|grad)?\\)$");
         Matcher matcher = pattern.matcher(value.getValue());
         if (matcher.find()) {
+            if (matcher.group(1).equals("")) {
+                return null;
+            }
             Double val = null;
             if (matcher.group(2) == null) {
                 val = Math.sin(new Double(matcher.group(1)));

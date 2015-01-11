@@ -118,4 +118,13 @@ public class SinusConverterTest {
 
         assertNull(result);
     }
+
+    @Test
+    public void testEmptyParameter() {
+        String input = "sin()";
+        ParsedValue<String, Number> value = new ParsedValueImpl<>(input, converter);
+        Number result = converter.convert(value, null);
+
+        assertNull(result);
+    }
 }
