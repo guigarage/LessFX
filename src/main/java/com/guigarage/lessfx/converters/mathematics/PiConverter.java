@@ -1,16 +1,16 @@
-package com.guigarage.lessfx.converters;
+package com.guigarage.lessfx.converters.mathematics;
 
+import com.guigarage.lessfx.converters.LessStyleConverter;
 import javafx.css.ParsedValue;
-import javafx.css.StyleConverter;
 import javafx.scene.text.Font;
 
 /**
  * @author Robin Küster
  * @since 2015-01-11
  */
-public class PiConverter extends StyleConverter<String, Number> {
+public class PiConverter extends LessStyleConverter<String, Number> {
     public PiConverter() {
-
+        super();
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.guigarage.lessfx.converters;
+package com.guigarage.lessfx.converters.mathematics;
 
 import com.sun.javafx.css.ParsedValueImpl;
 import javafx.css.ParsedValue;
@@ -7,17 +7,17 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class FloorConverterTest {
-    private FloorConverter converter;
+public class CeilConverterTest {
+    private CeilConverter converter;
 
     @Before
     public void initialize() {
-        this.converter = new FloorConverter();
+        this.converter = new CeilConverter();
     }
 
     @Test
     public void testIntegerValue() {
-        String input = "floor(3)";
+        String input = "ceil(3)";
         ParsedValue<String, Integer> value = new ParsedValueImpl<>(input, converter);
         Integer result = converter.convert(value, null);
 
@@ -27,7 +27,7 @@ public class FloorConverterTest {
 
     @Test
     public void testNegativeIntegerValue() {
-        String input = "floor(-3)";
+        String input = "ceil(-3)";
         ParsedValue<String, Integer> value = new ParsedValueImpl<>(input, converter);
         Integer result = converter.convert(value, null);
 
@@ -37,27 +37,27 @@ public class FloorConverterTest {
 
     @Test
     public void testDoubleValue() {
-        String input = "floor(3.6)";
+        String input = "ceil(3.4)";
         ParsedValue<String, Integer> value = new ParsedValueImpl<>(input, converter);
         Integer result = converter.convert(value, null);
 
         assertNotNull(result);
-        assertEquals(result.doubleValue(), 3.0, 0.000001);
+        assertEquals(result.doubleValue(), 4.0, 0.000001);
     }
 
     @Test
     public void testNegativeDoubleValue() {
-        String input = "floor(-3.4)";
+        String input = "ceil(-3.6)";
         ParsedValue<String, Integer> value = new ParsedValueImpl<>(input, converter);
         Integer result = converter.convert(value, null);
 
         assertNotNull(result);
-        assertEquals(result.doubleValue(), -4.0, 0.000001);
+        assertEquals(result.doubleValue(), -3.0, 0.000001);
     }
 
     @Test
     public void testStringValue() {
-        String input = "floor(not a number!)";
+        String input = "ceil(not a number!)";
         ParsedValue<String, Integer> value = new ParsedValueImpl<>(input, converter);
         Integer result = converter.convert(value, null);
 
@@ -66,7 +66,7 @@ public class FloorConverterTest {
 
     @Test
     public void testValueWithUnit() {
-        String input = "floor(20.9px)";
+        String input = "ceil(20.9px)";
         ParsedValue<String, Integer> value = new ParsedValueImpl<>(input, converter);
         Integer result = converter.convert(value, null);
 
@@ -75,7 +75,7 @@ public class FloorConverterTest {
 
     @Test
     public void testEmptyValue() {
-        String input = "floor()";
+        String input = "ceil()";
         ParsedValue<String, Integer> value = new ParsedValueImpl<>(input, converter);
         Integer result = converter.convert(value, null);
 

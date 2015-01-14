@@ -1,4 +1,4 @@
-package com.guigarage.lessfx.converters;
+package com.guigarage.lessfx.converters.mathematics;
 
 import com.sun.javafx.css.ParsedValueImpl;
 import javafx.css.ParsedValue;
@@ -7,121 +7,111 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class CosineConverterTest {
-    private CosineConverter converter;
+public class RoundConverterTest {
+    private RoundConverter converter;
+
     @Before
     public void initialize() {
-        this.converter = new CosineConverter();
+        this.converter = new RoundConverter();
     }
 
     @Test
     public void testIntegerValue() {
-        String input = "cos(60)";
+        String input = "round(4)";
         ParsedValue<String, Number> value = new ParsedValueImpl<>(input, converter);
         Number result = converter.convert(value, null);
 
         assertNotNull(result);
-        assertEquals(Math.cos(60), result.doubleValue(), 0.0001);
-    }
-
-    @Test
-    public void testDoubleValue() {
-        String input = "cos(3.14159)";
-        ParsedValue<String, Number> value = new ParsedValueImpl<>(input, converter);
-        Number result = converter.convert(value, null);
-
-        assertNotNull(result);
-        assertEquals(Math.cos(3.14159), result.doubleValue(), 0.0001);
+        assertEquals(4.0, result.doubleValue(), 0.0001);
     }
 
     @Test
     public void testNegativeIntegerValue() {
-        String input = "cos(-20)";
+        String input = "round(-4)";
         ParsedValue<String, Number> value = new ParsedValueImpl<>(input, converter);
         Number result = converter.convert(value, null);
 
         assertNotNull(result);
-        assertEquals(Math.cos(-20), result.doubleValue(), 0.0001);
+        assertEquals(-4.0, result.doubleValue(), 0.0001);
+    }
+
+    @Test
+    public void testDoubleValue() {
+        String input = "round(4.5)";
+        ParsedValue<String, Number> value = new ParsedValueImpl<>(input, converter);
+        Number result = converter.convert(value, null);
+
+        assertNotNull(result);
+        assertEquals(5.0, result.doubleValue(), 0.0001);
     }
 
     @Test
     public void testNegativeDoubleValue() {
-        String input = "cos(-3.14159)";
+        String input = "round(-4.5)";
         ParsedValue<String, Number> value = new ParsedValueImpl<>(input, converter);
         Number result = converter.convert(value, null);
 
         assertNotNull(result);
-        assertEquals(Math.cos(-3.14159), result.doubleValue(), 0.0001);
+        assertEquals(-4.0, result.doubleValue(), 0.0001);
     }
 
     @Test
-    public void testDegValue() {
-        String input = "cos(20deg)";
+    public void testDecimalPlaceValue() {
+        String input = "round(4.12345, 3)";
         ParsedValue<String, Number> value = new ParsedValueImpl<>(input, converter);
         Number result = converter.convert(value, null);
 
         assertNotNull(result);
-        assertEquals(Math.cos(20 * (Math.PI / 180)), result.doubleValue(), 0.0001);
+        assertEquals(4.123, result.doubleValue(), 0.0001);
     }
 
     @Test
-    public void testNegativeDegValue() {
-        String input  = "cos(-20deg)";
+    public void testNegativeDecimalPlaceValue() {
+        String input = "round(-4.12345, 3)";
         ParsedValue<String, Number> value = new ParsedValueImpl<>(input, converter);
         Number result = converter.convert(value, null);
 
         assertNotNull(result);
-        assertEquals(Math.cos(-20 * (Math.PI / 180)), result.doubleValue(), 0.0001);
+        assertEquals(-4.123, result.doubleValue(), 0.0001);
     }
 
     @Test
-    public void testGradValue() {
-        String input = "cos(20grad)";
+    public void testZeroDecimalPlaceValue() {
+        String input = "round(4.12345, 0)";
         ParsedValue<String, Number> value = new ParsedValueImpl<>(input, converter);
         Number result = converter.convert(value, null);
 
         assertNotNull(result);
-        assertEquals(Math.cos(20 * (Math.PI / 200)), result.doubleValue(), 0.0001);
+        assertEquals(4.0, result.doubleValue(), 0.0001);
     }
 
     @Test
-    public void testNegativeGradValue() {
-        String input  = "cos(-20grad)";
-        ParsedValue<String, Number> value = new ParsedValueImpl<>(input, converter);
-        Number result = converter.convert(value, null);
-
-        assertNotNull(result);
-        assertEquals(Math.cos(-20 * (Math.PI / 200)), result.doubleValue(), 0.0001);
-    }
-
-    @Test
-    public void testStringValue() {
-        String input = "cos(not a number!)";
-        ParsedValue<String, Number> value = new ParsedValueImpl<>(input, converter);
-        Number result = converter.convert(value, null);
-
-        assertNull(result);
-    }
-
-    @Test
-    public void testUnitValue() {
-        String input = "cos(10px)";
-        String inputWithSpace = "cos(10 px)";
-
+    public void testNoDecimalValue() {
+        String input = "round(4, )";
         ParsedValue<String, Number> value = new ParsedValueImpl<>(input, converter);
         Number result = converter.convert(value, null);
 
         assertNull(result);
 
-        value = new ParsedValueImpl<>(inputWithSpace, converter);
+        input = "round(4,)";
+        value = new ParsedValueImpl<>(input, converter);
         result = converter.convert(value, null);
 
         assertNull(result);
     }
 
     @Test
-    public void testEmptyParameter() {
-        String input = "cos()";
+    public void testStringValue() {
+        String input = "round(not a number!)";
+        ParsedValue<String, Number> value = new ParsedValueImpl<>(input, converter);
+        Number result = converter.convert(value, null);
+
+        assertNull(result);
+    }
+
+    @Test
+    public void testEmptyValue() {
+        String input = "round()";
         ParsedValue<String, Number> value = new ParsedValueImpl<>(input, converter);
         Number result = converter.convert(value, null);
 

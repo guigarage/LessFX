@@ -1,4 +1,4 @@
-package com.guigarage.lessfx.converters;
+package com.guigarage.lessfx.converters.mathematics;
 
 import com.sun.javafx.css.ParsedValueImpl;
 import javafx.css.ParsedValue;
