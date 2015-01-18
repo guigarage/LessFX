@@ -11,7 +11,7 @@ public class SinusConverterTest {
     private SinusConverter converter;
     @Before
     public void initialize() {
-        this.converter = new SinusConverter();
+        this.converter = (SinusConverter)SinusConverter.getInstance();
     }
 
     @Test

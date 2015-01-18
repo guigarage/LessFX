@@ -11,27 +11,37 @@ import java.util.regex.Matcher;
  * @since   2015-01-11
  */
 public class SinusConverter extends LessStyleConverter<String, Number> {
-    public SinusConverter() {
+    private static class Holder {
+        static final SinusConverter INSTANCE = new SinusConverter();
+    }
+
+    public static LessStyleConverter<String, Number> getInstance() {
+        return Holder.INSTANCE;
+    }
+    
+    private SinusConverter() {
         super();
     }
 
     @Override
     public Number convert(ParsedValue<String, Number> value, Font font) {
-        Matcher matcher = getMatcher(value.getValue(), "^sin\\((-?[0-9]*\\.?[0-9]*)(deg|grad)?\\)$");
+        Matcher matcher = getMatcher(value.getValue(), "^sin\\((-?[0-9]+\\.?[0-9]*)(deg|grad|rad|turn)?\\)$");
 
-        // either nonsensical input (matcher == null) or parameter list empty
-        if (matcher == null || matcher.group(1).equals("")) {
+        // nonsensical
+        if (matcher == null) {
             return null;
         }
         Double val = null;
 
         // no unit (radiant by default)
-        if (matcher.group(2) == null) {
+        if (matcher.group(2) == null || matcher.group(2).equals("rad")) {
             val = Math.sin(Double.valueOf(matcher.group(1)));
         } else if (matcher.group(2).equals("deg")) { // degrees
             val = Math.sin(Double.valueOf(matcher.group(1)) * (Math.PI / 180));
         } else if (matcher.group(2).equals("grad")) { // gradient
             val = Math.sin(Double.valueOf(matcher.group(1)) * (Math.PI / 200));
+        } else if (matcher.group(2).equals("turn")) {
+            val = Math.sin(Double.valueOf(matcher.group(1)) * (2 * Math.PI));
         }
         return val;
     }

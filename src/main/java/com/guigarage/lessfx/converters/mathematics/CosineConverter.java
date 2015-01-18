@@ -11,27 +11,37 @@ import java.util.regex.Matcher;
  * @since   2015-01-11
  */
 public class CosineConverter extends LessStyleConverter<String, Number> {
-    public CosineConverter() {
+    private static class Holder {
+        static final CosineConverter INSTANCE = new CosineConverter();
+    }
+
+    public static LessStyleConverter<String, Number> getInstance() {
+        return Holder.INSTANCE;
+    }
+
+    private CosineConverter() {
         super();
     }
 
     @Override
     public Number convert(ParsedValue<String, Number> value, Font font) {
-        Matcher matcher = this.getMatcher(value.getValue(), "^cos\\((-?[0-9]*\\.?[0-9]*)(deg|grad)?\\)$");
+        Matcher matcher = this.getMatcher(value.getValue(), "^cos\\((-?[0-9]+\\.?[0-9]*)(deg|grad)?\\)$");
 
-        // Either nonsensical input (matcher == null) or no numerical value
-        if (matcher == null || matcher.group(1).equals("")) {
+        // nonsensical input
+        if (matcher == null) {
             return null;
         }
         Double val = null;
 
-        // no units
-        if (matcher.group(2) == null) {
+        // no units or rad
+        if (matcher.group(2) == null || matcher.group(2).equals("rad")) {
             val = Math.cos(Double.valueOf(matcher.group(1)));
         } else if (matcher.group(2).equals("deg")) { // degrees
             val = Math.cos(Double.valueOf(matcher.group(1)) * (Math.PI / 180));
         } else if (matcher.group(2).equals("grad")) { // gradient
             val = Math.cos(Double.valueOf(matcher.group(1)) * (Math.PI / 200));
+        } else if (matcher.group(2).equals("turn")) {
+            val = Math.cos(Double.valueOf(matcher.group(1)) * (2 * Math.PI));
         }
         return val;
     }

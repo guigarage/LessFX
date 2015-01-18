@@ -12,16 +12,24 @@ import java.util.regex.Matcher;
  * @since 2015-01-11
  */
 public class RoundConverter extends LessStyleConverter<String, Number> {
-    public RoundConverter() {
+    private static class Holder {
+        static final RoundConverter INSTANCE = new RoundConverter();
+    }
+
+    public static LessStyleConverter<String, Number> getInstance() {
+        return Holder.INSTANCE;
+    }
+    
+    private RoundConverter() {
         super();
     }
 
     @Override
     public Number convert(ParsedValue<String, Number> value, Font font) {
-        Matcher matcher = this.getMatcher(value.getValue(), "^round\\((-?[0-9]*.?[0-9]*),?\\s?([0-9]*)\\)$");
+        Matcher matcher = this.getMatcher(value.getValue(), "^round\\((-?[0-9]+.?[0-9]*),?\\s?([0-9]*)\\)$");
 
-        // either nonsensical input (matcher == null) or first parameter, which is required, is empty
-        if (matcher == null || matcher.group(1).equals("")) {
+        // nonsensical input
+        if (matcher == null) {
             return null;
         }
 

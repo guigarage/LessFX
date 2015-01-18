@@ -12,7 +12,7 @@ public class PercentageConverterTest {
 
     @Before
     public void initialize() {
-        converter = new PercentageConverter();
+        converter = (PercentageConverter)PercentageConverter.getInstance();
     }
 
     @Test

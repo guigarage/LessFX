@@ -12,7 +12,7 @@ public class PiConverterTest {
 
     @Before
     public void initialization() {
-        this.converter = new PiConverter();
+        this.converter = (PiConverter)PiConverter.getInstance();
     }
 
     @Test

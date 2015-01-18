@@ -11,17 +11,25 @@ import java.util.regex.Matcher;
  * @since 2015-01-11
  */
 public class CeilConverter extends LessStyleConverter<String, Integer> {
-    public CeilConverter() {
+    private static class Holder {
+        static final CeilConverter INSTANCE = new CeilConverter();
+    }
+
+    public static LessStyleConverter<String, Integer> getInstance() {
+        return Holder.INSTANCE;
+    }
+    
+    private CeilConverter() {
         super();
     }
 
     @Override
     public Integer convert(ParsedValue<String, Integer> value, Font font) {
-        Matcher matcher = this.getMatcher(value.getValue(), "^ceil\\((-?[0-9]*.?[0-9]*)\\)$");
+        Matcher matcher = this.getMatcher(value.getValue(), "^ceil\\((-?[0-9]+.?[0-9]*)\\)$");
         Number val;
 
-        // Either nonsensical string (matcher == null) or empty parameter list (group(1) is an empty string)
-        if (matcher == null || matcher.group(1).equals("")) {
+        // nonsensical input
+        if (matcher == null) {
             return null;
         } else {
             val = new Double(matcher.group(1));

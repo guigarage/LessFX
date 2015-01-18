@@ -9,7 +9,15 @@ import javafx.scene.text.Font;
  * @since 2015-01-11
  */
 public class PiConverter extends LessStyleConverter<String, Number> {
-    public PiConverter() {
+    private static class Holder {
+        static final PiConverter INSTANCE = new PiConverter();
+    }
+
+    public static LessStyleConverter<String, Number> getInstance() {
+        return Holder.INSTANCE;
+    }
+    
+    private PiConverter() {
         super();
     }
 

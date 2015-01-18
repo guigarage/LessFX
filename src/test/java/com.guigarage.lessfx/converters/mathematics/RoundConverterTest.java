@@ -12,7 +12,7 @@ public class RoundConverterTest {
 
     @Before
     public void initialize() {
-        this.converter = new RoundConverter();
+        this.converter = (RoundConverter)RoundConverter.getInstance();
     }
 
     @Test

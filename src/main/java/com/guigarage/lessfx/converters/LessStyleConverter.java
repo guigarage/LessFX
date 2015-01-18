@@ -1,5 +1,6 @@
 package com.guigarage.lessfx.converters;
 
+import com.sun.javafx.css.SizeUnits;
 import javafx.css.StyleConverter;
 
 import java.util.regex.Matcher;
@@ -21,6 +22,42 @@ public class LessStyleConverter<F, T> extends StyleConverter<F, T> {
             return matcher;
         } else {
             return null;
+        }
+    }
+
+    protected SizeUnits getUnit(String unit) {
+        if (unit == null) {
+            return null;
+        }
+        switch (unit) {
+            case "%":
+                return SizeUnits.PERCENT;
+            case "in":
+                return SizeUnits.IN;
+            case "cm":
+                return SizeUnits.CM;
+            case "mm":
+                return SizeUnits.MM;
+            case "em":
+                return SizeUnits.EM;
+            case "ex":
+                return SizeUnits.EX;
+            case "pt":
+                return SizeUnits.PT;
+            case "pc":
+                return SizeUnits.PC;
+            case "px":
+                return SizeUnits.PX;
+            case "grad":
+                return SizeUnits.GRAD;
+            case "deg":
+                return SizeUnits.DEG;
+            case "rad":
+                return SizeUnits.RAD;
+            case "turn":
+                return SizeUnits.TURN;
+            default:
+                return null;
         }
     }
 }

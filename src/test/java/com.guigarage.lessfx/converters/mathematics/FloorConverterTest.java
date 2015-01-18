@@ -12,7 +12,7 @@ public class FloorConverterTest {
 
     @Before
     public void initialize() {
-        this.converter = new FloorConverter();
+        this.converter = (FloorConverter)FloorConverter.getInstance();
     }
 
     @Test

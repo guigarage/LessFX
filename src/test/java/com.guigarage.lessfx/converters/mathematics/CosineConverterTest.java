@@ -11,7 +11,7 @@ public class CosineConverterTest {
     private CosineConverter converter;
     @Before
     public void initialize() {
-        this.converter = new CosineConverter();
+        this.converter = (CosineConverter)CosineConverter.getInstance();
     }
 
     @Test

@@ -12,7 +12,7 @@ public class CeilConverterTest {
 
     @Before
     public void initialize() {
-        this.converter = new CeilConverter();
+        this.converter = (CeilConverter)CeilConverter.getInstance();
     }
 
     @Test

@@ -11,17 +11,25 @@ import java.util.regex.Matcher;
  * @since 2015-01-11
  */
 public class FloorConverter extends LessStyleConverter<String, Integer> {
+    private static class Holder {
+        static final FloorConverter INSTANCE = new FloorConverter();
+    }
+
+    public static LessStyleConverter<String, Integer> getInstance() {
+        return Holder.INSTANCE;
+    }
+    
     public FloorConverter() {
         super();
     }
 
     @Override
     public Integer convert(ParsedValue<String, Integer> value, Font font) {
-        Matcher matcher = this.getMatcher(value.getValue(), "^floor\\((-?[0-9]*.?[0-9]*)\\)$");
+        Matcher matcher = this.getMatcher(value.getValue(), "^floor\\((-?[0-9]+.?[0-9]*)\\)$");
         Number val;
 
-        // either nonsensical (matcher == null) or empty parameter list
-        if (matcher == null || matcher.group(1).equals("")) {
+        // nonsensical
+        if (matcher == null) {
             return null;
         } else {
             val = new Double(matcher.group(1));

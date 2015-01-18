@@ -12,16 +12,24 @@ import java.util.regex.Matcher;
  * @since 2015-01-11
  */
 public class PercentageConverter extends LessStyleConverter<String, String> {
-    public PercentageConverter() {
+    private static class Holder {
+        static final PercentageConverter INSTANCE = new PercentageConverter();
+    }
+
+    public static LessStyleConverter<String, String> getInstance() {
+        return Holder.INSTANCE;
+    }
+    
+    private PercentageConverter() {
         super();
     }
 
     @Override
     public String convert(ParsedValue<String, String> value, Font font) {
-        Matcher matcher = this.getMatcher(value.getValue(), "^percentage\\((-?[0-9]*.?[0-9]*)\\)$");
+        Matcher matcher = this.getMatcher(value.getValue(), "^percentage\\((-?[0-9]+.?[0-9]*)\\)$");
 
-        // either nonsensical input (matcher == null) or empty parameter list
-        if (matcher == null || matcher.group(1).equals("")) {
+        // nonsensical input
+        if (matcher == null) {
             return null;
         }
         Double val = Double.valueOf(matcher.group(1)) * 100;
