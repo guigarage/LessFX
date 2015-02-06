@@ -22,7 +22,7 @@ public class FloorConverterTest {
         Integer result = converter.convert(value, null);
 
         assertNotNull(result);
-        assertEquals(result, 3, 0.1);
+        assertEquals(result, (Integer)3);
     }
 
     @Test
@@ -32,7 +32,7 @@ public class FloorConverterTest {
         Integer result = converter.convert(value, null);
 
         assertNotNull(result);
-        assertEquals(result, -3, 0.1);
+        assertEquals(result, (Integer)(-3));
     }
 
     @Test
@@ -42,7 +42,7 @@ public class FloorConverterTest {
         Integer result = converter.convert(value, null);
 
         assertNotNull(result);
-        assertEquals(result, 3, 0.1);
+        assertEquals(result, (Integer)3);
     }
 
     @Test
@@ -52,7 +52,7 @@ public class FloorConverterTest {
         Integer result = converter.convert(value, null);
 
         assertNotNull(result);
-        assertEquals(result, -4, 0.1);
+        assertEquals(result, (Integer)(-4));
     }
 
     @Test

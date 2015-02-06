@@ -29,7 +29,7 @@ public class LessStyleConverter<F, T> extends StyleConverter<F, T> {
         if (unit == null) {
             return null;
         }
-        switch (unit) {
+        switch (unit.toLowerCase()) {
             case "%":
                 return SizeUnits.PERCENT;
             case "in":
@@ -59,5 +59,9 @@ public class LessStyleConverter<F, T> extends StyleConverter<F, T> {
             default:
                 return null;
         }
+    }
+
+    protected String getUnitRegex() {
+        return "(%|in|cm|mm|em|ex|pt|pc|px|grad|deg|rad|turn)?";
     }
 }

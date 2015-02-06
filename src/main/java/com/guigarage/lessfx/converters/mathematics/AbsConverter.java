@@ -9,24 +9,24 @@ import java.util.regex.Matcher;
 
 /**
  * @author Robin Küster
- * @since 2015-01-15
+ * @since 2015-02-06
  */
-public class SqrtConverter extends LessStyleConverter<String, Size> {
+public class AbsConverter extends LessStyleConverter<String, Size> {
     private static class Holder {
-        static final SqrtConverter INSTANCE = new SqrtConverter();
+        static final AbsConverter INSTANCE = new AbsConverter();
     }
 
-    public static LessStyleConverter<String, Size> getInstance() {
+    public static AbsConverter getInstance() {
         return Holder.INSTANCE;
     }
 
-    private SqrtConverter() {
+    private AbsConverter() {
         super();
     }
 
     @Override
     public Size convert(ParsedValue<String, Size> value, Font font) {
-        Matcher matcher = this.getMatcher(value.getValue(), "^sqrt\\(([0-9]+\\.?[0-9]*)"+this.getUnitRegex()+"\\)$");
+        Matcher matcher = this.getMatcher(value.getValue(), "^abs\\((-?[0-9]+\\.?[0-9]*)"+this.getUnitRegex()+"\\)$");
 
         // nonsensical input
         if (matcher == null) {
@@ -34,6 +34,6 @@ public class SqrtConverter extends LessStyleConverter<String, Size> {
         }
 
         // first parameter: value. Second parameter: unit
-        return new Size(Math.sqrt(Double.valueOf(matcher.group(1))), this.getUnit(matcher.group(2)));
+        return new Size(Math.abs(Double.valueOf(matcher.group(1))), this.getUnit(matcher.group(2)));
     }
 }
