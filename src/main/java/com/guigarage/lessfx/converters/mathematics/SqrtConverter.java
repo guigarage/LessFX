@@ -21,7 +21,7 @@ public class SqrtConverter extends LessStyleConverter<String, Size> {
     }
 
     private SqrtConverter() {
-        super();
+
     }
 
     @Override

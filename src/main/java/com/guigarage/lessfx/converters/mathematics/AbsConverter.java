@@ -21,7 +21,7 @@ public class AbsConverter extends LessStyleConverter<String, Size> {
     }
 
     private AbsConverter() {
-        super();
+
     }
 
     @Override

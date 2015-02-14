@@ -20,7 +20,7 @@ public class CosineConverter extends LessStyleConverter<String, Number> {
     }
 
     private CosineConverter() {
-        super();
+
     }
 
     @Override

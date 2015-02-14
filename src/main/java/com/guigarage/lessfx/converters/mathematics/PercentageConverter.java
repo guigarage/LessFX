@@ -21,7 +21,7 @@ public class PercentageConverter extends LessStyleConverter<String, String> {
     }
     
     private PercentageConverter() {
-        super();
+
     }
 
     @Override

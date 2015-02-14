@@ -20,7 +20,7 @@ public class SinusConverter extends LessStyleConverter<String, Number> {
     }
     
     private SinusConverter() {
-        super();
+
     }
 
     @Override

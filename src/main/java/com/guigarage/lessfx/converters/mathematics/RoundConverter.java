@@ -21,7 +21,7 @@ public class RoundConverter extends LessStyleConverter<String, Number> {
     }
     
     private RoundConverter() {
-        super();
+
     }
 
     @Override

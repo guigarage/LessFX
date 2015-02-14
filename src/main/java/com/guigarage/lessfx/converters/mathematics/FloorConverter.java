@@ -20,7 +20,7 @@ public class FloorConverter extends LessStyleConverter<String, Integer> {
     }
     
     public FloorConverter() {
-        super();
+
     }
 
     @Override

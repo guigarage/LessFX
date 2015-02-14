@@ -18,7 +18,7 @@ public class PiConverter extends LessStyleConverter<String, Number> {
     }
     
     private PiConverter() {
-        super();
+
     }
 
     @Override

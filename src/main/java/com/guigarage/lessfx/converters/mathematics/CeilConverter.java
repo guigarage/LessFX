@@ -20,7 +20,7 @@ public class CeilConverter extends LessStyleConverter<String, Integer> {
     }
     
     private CeilConverter() {
-        super();
+
     }
 
     @Override

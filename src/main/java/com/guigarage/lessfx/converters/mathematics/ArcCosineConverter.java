@@ -20,7 +20,7 @@ public class ArcCosineConverter extends LessStyleConverter<String, Number> {
     }
 
     private ArcCosineConverter() {
-        super();
+
     }
 
     @Override
