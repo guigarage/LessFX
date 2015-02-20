@@ -1,5 +1,6 @@
 package com.guigarage.lessfx.converters.mathematics;
 
+import com.guigarage.lessfx.converters.MathematicsTest;
 import com.sun.javafx.css.ParsedValueImpl;
 import javafx.css.ParsedValue;
 import org.junit.Before;
@@ -7,7 +8,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class TanConverterTest {
+public class TanConverterTest extends MathematicsTest {
     private TanConverter converter;
 
     @Before
@@ -16,7 +17,7 @@ public class TanConverterTest {
     }
 
     @Test
-    public void testIntegerValue() {
+    public void testInteger() {
         String input = "tan(60)";
         ParsedValue<String, Number> value = new ParsedValueImpl<>(input, converter);
         Number result = converter.convert(value, null);
@@ -26,7 +27,7 @@ public class TanConverterTest {
     }
 
     @Test
-    public void testDoubleValue() {
+    public void testDouble() {
         String input = "tan(3.14159)";
         ParsedValue<String, Number> value = new ParsedValueImpl<>(input, converter);
         Number result = converter.convert(value, null);
@@ -36,7 +37,7 @@ public class TanConverterTest {
     }
 
     @Test
-    public void testNegativeIntegerValue() {
+    public void testNegInteger() {
         String input = "tan(-20)";
         ParsedValue<String, Number> value = new ParsedValueImpl<>(input, converter);
         Number result = converter.convert(value, null);
@@ -46,13 +47,27 @@ public class TanConverterTest {
     }
 
     @Test
-    public void testNegativeDoubleValue() {
+    public void testNegDouble() {
         String input = "tan(-3.14159)";
         ParsedValue<String, Number> value = new ParsedValueImpl<>(input, converter);
         Number result = converter.convert(value, null);
 
         assertNotNull(result);
         assertEquals(Math.tan(-3.14159), result.doubleValue(), 0.0001);
+    }
+
+    @Override
+    public void testMultipleParameters() {
+        String input = "tan(34, 23)";
+        ParsedValue<String, Number> value = new ParsedValueImpl<>(input, converter);
+        Number result = converter.convert(value, null);
+
+        assertNull(result);
+    }
+
+    @Override
+    public void testOneParameter() {
+        this.testInteger();
     }
 
     @Test
@@ -96,7 +111,7 @@ public class TanConverterTest {
     }
 
     @Test
-    public void testStringValue() {
+    public void testNaN() {
         String input = "tan(not a number!)";
         ParsedValue<String, Number> value = new ParsedValueImpl<>(input, converter);
         Number result = converter.convert(value, null);
@@ -105,7 +120,7 @@ public class TanConverterTest {
     }
 
     @Test
-    public void testUnitValue() {
+    public void testUnits() {
         String input = "tan(10px)";
         String inputWithSpace = "tan(10 px)";
 
@@ -122,7 +137,7 @@ public class TanConverterTest {
     }
 
     @Test
-    public void testEmptyParameter() {
+    public void testEmpty() {
         String input = "tan()";
         ParsedValue<String, Number> value = new ParsedValueImpl<>(input, converter);
         Number result = converter.convert(value, null);

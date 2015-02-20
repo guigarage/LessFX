@@ -1,5 +1,6 @@
 package com.guigarage.lessfx.converters.mathematics;
 
+import com.guigarage.lessfx.converters.MathematicsTest;
 import com.sun.javafx.css.ParsedValueImpl;
 import com.sun.javafx.css.Size;
 import com.sun.javafx.css.SizeUnits;
@@ -9,7 +10,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class ModConverterTest {
+public class ModConverterTest extends MathematicsTest {
     private ModConverter converter;
 
     @Before
@@ -17,7 +18,7 @@ public class ModConverterTest {
         converter = ModConverter.getInstance();
     }
 
-    @Test
+    @Override
      public void testInteger() {
         String input = "mod(3, 2)";
         ParsedValue<String, Size> value = new ParsedValueImpl<>(input, converter);
@@ -27,7 +28,7 @@ public class ModConverterTest {
         assertEquals(result.getValue(), 3 % 2, 0.000001);
     }
 
-    @Test
+    @Override
     public void testDouble() {
         String input = "mod(3.4, 2.1)";
         ParsedValue<String, Size> value = new ParsedValueImpl<>(input, converter);
@@ -37,68 +38,63 @@ public class ModConverterTest {
         assertEquals(result.getValue(), 3.4 % 2.1, 0.000001);
     }
 
-    @Test
-    public void testNeg1Integer() {
-        String input = "mod(-3, 2)";
-        ParsedValue<String, Size> value = new ParsedValueImpl<>(input, converter);
-        Size result = converter.convert(value, null);
+    @Override
+    public void testNegInteger() {
+        String inputs[] = new String[] {
+                "mod(-3, 2)",
+                "mod(3, -2)",
+                "mod(-3, -2)"
 
-        assertNotNull(result);
-        assertEquals(result.getValue(), -3 % 2, 0.000001);
+        };
+
+        double outputs[] = new double[] {
+                -3 % 2,
+                3 % -2,
+                -3 % -2
+        };
+
+        for(int i = 0; i < 3; i++) {
+            String input = inputs[i];
+            ParsedValue<String, Size> value = new ParsedValueImpl<>(input, converter);
+            Size result = converter.convert(value, null);
+
+            assertNotNull(result);
+            assertEquals(result.getValue(), outputs[i], 0.000001);
+        }
     }
 
-    @Test
-     public void testNeg2Integer() {
-        String input = "mod(3, -2)";
-        ParsedValue<String, Size> value = new ParsedValueImpl<>(input, converter);
-        Size result = converter.convert(value, null);
+    @Override
+    public void testNegDouble() {
+        String inputs[] = new String[] {
+                "mod(-3.2, 2.2)",
+                "mod(3.2, -2.2)",
+                "mod(-3.2, -2.2)"
 
-        assertNotNull(result);
-        assertEquals(result.getValue(), 3 % -2, 0.000001);
+        };
+
+        double outputs[] = new double[] {
+                -3.2 % 2.2,
+                3.2 % -2.2,
+                -3.2 % -2.2
+        };
+
+        for(int i = 0; i < 3; i++) {
+            String input = inputs[i];
+            ParsedValue<String, Size> value = new ParsedValueImpl<>(input, converter);
+            Size result = converter.convert(value, null);
+
+            assertNotNull(result);
+            assertEquals(result.getValue(), outputs[i], 0.000001);
+        }
     }
 
-    @Test
-    public void testNeg3Integer() {
-        String input = "mod(-3, -2)";
-        ParsedValue<String, Size> value = new ParsedValueImpl<>(input, converter);
-        Size result = converter.convert(value, null);
-
-        assertNotNull(result);
-        assertEquals(result.getValue(), -3 % -2, 0.000001);
+    @Override
+    public void testMultipleParameters() {
+        this.testInteger();
     }
 
-    @Test
-    public void testNeg1Double() {
-        String input = "mod(-3.4, 2.1)";
-        ParsedValue<String, Size> value = new ParsedValueImpl<>(input, converter);
-        Size result = converter.convert(value, null);
-
-        assertNotNull(result);
-        assertEquals(result.getValue(), -3.4 % 2.1, 0.000001);
-    }
-
-    @Test
-    public void testNeg2Double() {
-        String input = "mod(3.4, -2.1)";
-        ParsedValue<String, Size> value = new ParsedValueImpl<>(input, converter);
-        Size result = converter.convert(value, null);
-
-        assertNotNull(result);
-        assertEquals(result.getValue(), 3.4 % -2.1, 0.000001);
-    }
-
-    @Test
-    public void testNeg3Double() {
-        String input = "mod(-3.4, -2.1)";
-        ParsedValue<String, Size> value = new ParsedValueImpl<>(input, converter);
-        Size result = converter.convert(value, null);
-
-        assertNotNull(result);
-        assertEquals(result.getValue(), -3.4 % -2.1, 0.000001);
-    }
-
-    @Test
-     public void testUnitInteger() {
+    @Override
+     public void testUnits() {
         String input = "mod(3px, 2cm)";
         ParsedValue<String, Size> value = new ParsedValueImpl<>(input, converter);
         Size result = converter.convert(value, null);
@@ -108,20 +104,18 @@ public class ModConverterTest {
         assertEquals(SizeUnits.PX, result.getUnits());
     }
 
-    @Test
-    public void testUnitDouble() {
-        String input = "mod(3.2px, 2.2cm)";
+    @Override
+    public void testNaN() {
+        String input = "mod(Not a number!)";
         ParsedValue<String, Size> value = new ParsedValueImpl<>(input, converter);
         Size result = converter.convert(value, null);
 
-        assertNotNull(result);
-        assertEquals(result.getValue(), 3.2 % 2.2, 0.000001);
-        assertEquals(SizeUnits.PX, result.getUnits());
+        assertNull(result);
     }
 
-    @Test
-    public void testNaN() {
-        String input = "mod(Not a number!)";
+    @Override
+    public void testEmpty() {
+        String input = "mod()";
         ParsedValue<String, Size> value = new ParsedValueImpl<>(input, converter);
         Size result = converter.convert(value, null);
 

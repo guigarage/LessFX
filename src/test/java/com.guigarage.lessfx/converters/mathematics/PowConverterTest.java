@@ -1,5 +1,6 @@
 package com.guigarage.lessfx.converters.mathematics;
 
+import com.guigarage.lessfx.converters.MathematicsTest;
 import com.sun.javafx.css.ParsedValueImpl;
 import com.sun.javafx.css.Size;
 import com.sun.javafx.css.SizeUnits;
@@ -9,7 +10,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class PowConverterTest {
+public class PowConverterTest extends MathematicsTest {
     private PowConverter converter;
 
     @Before
@@ -57,6 +58,11 @@ public class PowConverterTest {
         assertEquals(Math.pow(3.2, -2.2), result.getValue(), 0.0001);
     }
 
+    @Override
+    public void testMultipleParameters() {
+        this.testInteger();
+    }
+
     @Test
     public void testUnit() {
         String input = "pow(3.2cm, 2.2rad)";
@@ -86,13 +92,32 @@ public class PowConverterTest {
         assertNull(result);
     }
 
+    @Override
+    public void testEmpty() {
+        String input = "pow()";
+        ParsedValue<String, Size> value = new ParsedValueImpl<>(input, converter);
+        Size result = converter.convert(value, null);
+
+        assertNull(result);
+    }
+
     @Test
-    public void testOnePar() {
+    public void testOneParameter() {
         String input = "pow(3)";
         ParsedValue<String, Size> value = new ParsedValueImpl<>(input, converter);
         Size result = converter.convert(value, null);
 
         assertNull(result);
+    }
+
+    @Override
+    public void testUnits() {
+        String input = "pow(3.2cm, 2.2)";
+        ParsedValue<String, Size> value = new ParsedValueImpl<>(input, converter);
+        Size result = converter.convert(value, null);
+
+        assertNotNull(result);
+        assertEquals(Math.pow(3.2, 2.2), result.getValue(), 0.0001);
     }
 
 }

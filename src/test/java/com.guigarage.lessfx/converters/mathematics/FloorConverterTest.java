@@ -1,13 +1,13 @@
 package com.guigarage.lessfx.converters.mathematics;
 
+import com.guigarage.lessfx.converters.MathematicsTest;
 import com.sun.javafx.css.ParsedValueImpl;
 import javafx.css.ParsedValue;
 import org.junit.Before;
-import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class FloorConverterTest {
+public class FloorConverterTest extends MathematicsTest {
     private FloorConverter converter;
 
     @Before
@@ -15,8 +15,8 @@ public class FloorConverterTest {
         this.converter = (FloorConverter)FloorConverter.getInstance();
     }
 
-    @Test
-    public void testIntegerValue() {
+    @Override
+    public void testInteger() {
         String input = "floor(3)";
         ParsedValue<String, Integer> value = new ParsedValueImpl<>(input, converter);
         Integer result = converter.convert(value, null);
@@ -25,8 +25,8 @@ public class FloorConverterTest {
         assertEquals(result, (Integer)3);
     }
 
-    @Test
-    public void testNegativeIntegerValue() {
+    @Override
+    public void testNegInteger() {
         String input = "floor(-3)";
         ParsedValue<String, Integer> value = new ParsedValueImpl<>(input, converter);
         Integer result = converter.convert(value, null);
@@ -35,8 +35,8 @@ public class FloorConverterTest {
         assertEquals(result, (Integer)(-3));
     }
 
-    @Test
-    public void testDoubleValue() {
+    @Override
+    public void testDouble() {
         String input = "floor(3.6)";
         ParsedValue<String, Integer> value = new ParsedValueImpl<>(input, converter);
         Integer result = converter.convert(value, null);
@@ -45,8 +45,8 @@ public class FloorConverterTest {
         assertEquals(result, (Integer)3);
     }
 
-    @Test
-    public void testNegativeDoubleValue() {
+    @Override
+    public void testNegDouble() {
         String input = "floor(-3.4)";
         ParsedValue<String, Integer> value = new ParsedValueImpl<>(input, converter);
         Integer result = converter.convert(value, null);
@@ -55,8 +55,22 @@ public class FloorConverterTest {
         assertEquals(result, (Integer)(-4));
     }
 
-    @Test
-    public void testStringValue() {
+    @Override
+    public void testMultipleParameters() {
+        String input = "floor(3, 4)";
+        ParsedValue<String, Integer> value = new ParsedValueImpl<>(input, converter);
+        Integer result = converter.convert(value, null);
+
+        assertNull(result);
+    }
+
+    @Override
+    public void testOneParameter() {
+        this.testInteger();
+    }
+
+    @Override
+    public void testNaN() {
         String input = "floor(not a number!)";
         ParsedValue<String, Integer> value = new ParsedValueImpl<>(input, converter);
         Integer result = converter.convert(value, null);
@@ -64,8 +78,8 @@ public class FloorConverterTest {
         assertNull(result);
     }
 
-    @Test
-    public void testValueWithUnit() {
+    @Override
+    public void testUnits() {
         String input = "floor(20.9px)";
         ParsedValue<String, Integer> value = new ParsedValueImpl<>(input, converter);
         Integer result = converter.convert(value, null);
@@ -73,8 +87,8 @@ public class FloorConverterTest {
         assertNull(result);
     }
 
-    @Test
-    public void testEmptyValue() {
+    @Override
+    public void testEmpty() {
         String input = "floor()";
         ParsedValue<String, Integer> value = new ParsedValueImpl<>(input, converter);
         Integer result = converter.convert(value, null);
