@@ -33,4 +33,7 @@ public abstract class MiscTest {
 
     @Test
     public abstract void testNegDouble();
+
+    @Test
+    public abstract void testUnit();
 }

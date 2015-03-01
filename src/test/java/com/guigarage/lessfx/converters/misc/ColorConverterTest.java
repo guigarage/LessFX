@@ -99,4 +99,13 @@ public class ColorConverterTest extends MiscTest {
 
         assertNull(result);
     }
+
+    @Override
+    public void testUnit() {
+        String input = "color(\"#FFFFFF\"px)";
+        ParsedValue<String, Color> value = new ParsedValueImpl<>(input, converter);
+        Color result = converter.convert(value, null);
+
+        assertNull(result);
+    }
 }
