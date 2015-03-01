@@ -11,6 +11,8 @@ import java.util.regex.Matcher;
  * @since 2015-02-14
  */
 public class ArcTanConverter extends LessStyleConverter<String, Number> {
+    private final static String REGEX = "^atan\\((-?[0-9]+\\.?[0-9]*)\\)$";
+
     private static class Holder {
         static final ArcTanConverter INSTANCE = new ArcTanConverter();
     }
@@ -25,7 +27,7 @@ public class ArcTanConverter extends LessStyleConverter<String, Number> {
 
     @Override
     public Number convert(ParsedValue<String, Number> value, Font font) {
-        Matcher matcher = this.getMatcher(value.getValue(), "^atan\\((-?[0-9]+\\.?[0-9]*)\\)$");
+        Matcher matcher = this.getMatcher(value.getValue(), REGEX);
 
         // nonsensical input
         if (matcher == null) {

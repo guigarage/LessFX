@@ -11,6 +11,8 @@ import java.util.regex.Matcher;
  * @since   2015-01-11
  */
 public class SinusConverter extends LessStyleConverter<String, Number> {
+    private final static String REGEX = "^sin\\((-?[0-9]+\\.?[0-9]*)(deg|grad|rad|turn)?\\)$";
+
     private static class Holder {
         static final SinusConverter INSTANCE = new SinusConverter();
     }
@@ -25,7 +27,7 @@ public class SinusConverter extends LessStyleConverter<String, Number> {
 
     @Override
     public Number convert(ParsedValue<String, Number> value, Font font) {
-        Matcher matcher = getMatcher(value.getValue(), "^sin\\((-?[0-9]+\\.?[0-9]*)(deg|grad|rad|turn)?\\)$");
+        Matcher matcher = getMatcher(value.getValue(), REGEX);
 
         // nonsensical
         if (matcher == null) {

@@ -11,6 +11,8 @@ import java.util.regex.Matcher;
  * @since 2015-01-11
  */
 public class FloorConverter extends LessStyleConverter<String, Integer> {
+    private final static String REGEX = "^floor\\((-?[0-9]+.?[0-9]*)\\)$";
+
     private static class Holder {
         static final FloorConverter INSTANCE = new FloorConverter();
     }
@@ -25,7 +27,7 @@ public class FloorConverter extends LessStyleConverter<String, Integer> {
 
     @Override
     public Integer convert(ParsedValue<String, Integer> value, Font font) {
-        Matcher matcher = this.getMatcher(value.getValue(), "^floor\\((-?[0-9]+.?[0-9]*)\\)$");
+        Matcher matcher = this.getMatcher(value.getValue(), REGEX);
         Number val;
 
         // nonsensical

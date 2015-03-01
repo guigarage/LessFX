@@ -12,6 +12,8 @@ import java.util.regex.Matcher;
  * @since 2015-02-06
  */
 public class AbsConverter extends LessStyleConverter<String, Size> {
+    private final static String REGEX1 = "^abs\\((-?[0-9]+\\.?[0-9]*)";
+    private final static String REGEX2 = "\\)$";
     private static class Holder {
         static final AbsConverter INSTANCE = new AbsConverter();
     }
@@ -26,7 +28,7 @@ public class AbsConverter extends LessStyleConverter<String, Size> {
 
     @Override
     public Size convert(ParsedValue<String, Size> value, Font font) {
-        Matcher matcher = this.getMatcher(value.getValue(), "^abs\\((-?[0-9]+\\.?[0-9]*)"+this.getUnitRegex()+"\\)$");
+        Matcher matcher = this.getMatcher(value.getValue(), REGEX1+this.getUnitRegex()+REGEX2);
 
         // nonsensical input
         if (matcher == null) {

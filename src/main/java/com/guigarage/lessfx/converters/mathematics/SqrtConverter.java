@@ -12,6 +12,9 @@ import java.util.regex.Matcher;
  * @since 2015-01-15
  */
 public class SqrtConverter extends LessStyleConverter<String, Size> {
+    private final static String REGEX1 = "^sqrt\\(([0-9]+\\.?[0-9]*)";
+    private final static String REGEX2 = "\\)$";
+
     private static class Holder {
         static final SqrtConverter INSTANCE = new SqrtConverter();
     }
@@ -26,7 +29,7 @@ public class SqrtConverter extends LessStyleConverter<String, Size> {
 
     @Override
     public Size convert(ParsedValue<String, Size> value, Font font) {
-        Matcher matcher = this.getMatcher(value.getValue(), "^sqrt\\(([0-9]+\\.?[0-9]*)"+this.getUnitRegex()+"\\)$");
+        Matcher matcher = this.getMatcher(value.getValue(), REGEX1+this.getUnitRegex()+REGEX2);
 
         // nonsensical input
         if (matcher == null) {

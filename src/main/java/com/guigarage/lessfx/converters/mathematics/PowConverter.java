@@ -12,6 +12,10 @@ import java.util.regex.Matcher;
  * @since 2015-02-14
  */
 public class PowConverter extends LessStyleConverter<String, Size> {
+    private final static String REGEX1 = "^pow\\(([0-9]*\\.?[0-9]*)";
+    private final static String REGEX2 = "\\,\\s?(-?[0-9]*\\.?[0-9]*)";
+    private final static String REGEX3 = "\\)$";
+
     private static class Holder {
         static final PowConverter INSTANCE = new PowConverter();
     }
@@ -26,7 +30,7 @@ public class PowConverter extends LessStyleConverter<String, Size> {
 
     @Override
     public Size convert(ParsedValue<String, Size> value, Font font) {
-        Matcher matcher = this.getMatcher(value.getValue(), "^pow\\(([0-9]*\\.?[0-9]*)"+this.getUnitRegex()+"\\,\\s?(-?[0-9]*\\.?[0-9]*)"+this.getUnitRegex()+"\\)$");
+        Matcher matcher = this.getMatcher(value.getValue(), REGEX1+this.getUnitRegex()+REGEX2+this.getUnitRegex()+REGEX3);
 
         if (matcher == null) {
             return null;

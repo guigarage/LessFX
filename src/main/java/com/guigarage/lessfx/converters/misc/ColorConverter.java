@@ -12,6 +12,8 @@ import java.util.regex.Matcher;
  * @since 2015-03-01
  */
 public class ColorConverter extends LessStyleConverter<String, Color> {
+    private final static String REGEX = "^color\\(\\\"\\#((?:[0-9a-fA-F]{3})|(?:[0-9a-fA-F]{6}))\\\"\\)$";
+
     private static class Holder {
         static final ColorConverter INSTANCE = new ColorConverter();
     }
@@ -26,7 +28,7 @@ public class ColorConverter extends LessStyleConverter<String, Color> {
 
     @Override
     public Color convert(ParsedValue<String, Color> value, Font font) {
-        Matcher matcher = this.getMatcher(value.getValue(), "^color\\(\\\"\\#((?:[0-9a-fA-F]{3})|(?:[0-9a-fA-F]{6}))\\\"\\)$");
+        Matcher matcher = this.getMatcher(value.getValue(), REGEX);
 
 
         // nonsensical input

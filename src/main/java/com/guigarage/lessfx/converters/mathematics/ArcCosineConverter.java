@@ -11,6 +11,8 @@ import java.util.regex.Matcher;
  * @since 2015-02-06
  */
 public class ArcCosineConverter extends LessStyleConverter<String, Number> {
+    private final static String REGEX = "^acos\\((-?[0-9]*\\.?[0-9]*)\\)$";
+
     private static class Holder {
         static final ArcCosineConverter INSTANCE = new ArcCosineConverter();
     }
@@ -25,7 +27,7 @@ public class ArcCosineConverter extends LessStyleConverter<String, Number> {
 
     @Override
     public Number convert(ParsedValue<String, Number> value, Font font) {
-        Matcher matcher = getMatcher(value.getValue(), "^acos\\((-?[0-9]*\\.?[0-9]*)\\)$");
+        Matcher matcher = getMatcher(value.getValue(), REGEX);
 
         // nonsensical input
         if (matcher == null) {

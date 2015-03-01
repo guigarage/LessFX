@@ -12,6 +12,8 @@ import java.util.regex.Matcher;
  * @since 2015-03-01
  */
 public class GetUnitConverter extends LessStyleConverter<String, SizeUnits> {
+    private final static String REGEX = "^get\\-unit\\((?:\\-?[0-9]*(?:\\.[0-9])?)([a-zA-Z]*)\\)$";
+
     private static class Holder {
         static final GetUnitConverter INSTANCE = new GetUnitConverter();
     }
@@ -26,7 +28,7 @@ public class GetUnitConverter extends LessStyleConverter<String, SizeUnits> {
 
     @Override
     public SizeUnits convert(ParsedValue<String, SizeUnits> value, Font font) {
-        Matcher matcher = this.getMatcher(value.getValue(), "^get\\-unit\\((?:\\-?[0-9]*(?:\\.[0-9])?)([a-zA-Z]*)\\)$");
+        Matcher matcher = this.getMatcher(value.getValue(), REGEX);
 
 
         // nonsensical input

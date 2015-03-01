@@ -12,6 +12,9 @@ import java.util.regex.Matcher;
  * @since 2015-02-13
  */
 public class TanConverter extends LessStyleConverter<String, Number> {
+    private final static String REGEX1 = "^tan\\((-?[0-9]+\\.?[0-9]*)";
+    private final static String REGEX2 = "\\)$";
+
     private static class Holder {
         static final TanConverter INSTANCE = new TanConverter();
     }
@@ -26,7 +29,7 @@ public class TanConverter extends LessStyleConverter<String, Number> {
 
     @Override
     public Number convert(ParsedValue<String, Number> value, Font font) {
-        Matcher matcher = this.getMatcher(value.getValue(), "^tan\\((-?[0-9]+\\.?[0-9]*)"+this.getUnitRegex()+"\\)$");
+        Matcher matcher = this.getMatcher(value.getValue(), REGEX1+this.getUnitRegex()+REGEX2);
 
         // nonsensical input
         if (matcher == null) {

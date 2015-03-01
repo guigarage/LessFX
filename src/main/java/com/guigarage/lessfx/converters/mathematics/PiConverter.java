@@ -9,6 +9,8 @@ import javafx.scene.text.Font;
  * @since 2015-01-11
  */
 public class PiConverter extends LessStyleConverter<String, Number> {
+    private final static String REGEX = "pi()";
+
     private static class Holder {
         static final PiConverter INSTANCE = new PiConverter();
     }
@@ -23,7 +25,7 @@ public class PiConverter extends LessStyleConverter<String, Number> {
 
     @Override
     public Number convert(ParsedValue<String, Number> value, Font font) {
-        if (value.getValue().equals("pi()")) {
+        if (value.getValue().equals(REGEX)) {
             return 3.141592653589793;
         } else {
             return null;

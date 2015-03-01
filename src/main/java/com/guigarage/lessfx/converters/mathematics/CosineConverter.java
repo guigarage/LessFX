@@ -11,6 +11,8 @@ import java.util.regex.Matcher;
  * @since   2015-01-11
  */
 public class CosineConverter extends LessStyleConverter<String, Number> {
+    private final static String REGEX = "^cos\\((-?[0-9]+\\.?[0-9]*)(deg|grad)?\\)$";
+
     private static class Holder {
         static final CosineConverter INSTANCE = new CosineConverter();
     }
@@ -25,7 +27,7 @@ public class CosineConverter extends LessStyleConverter<String, Number> {
 
     @Override
     public Number convert(ParsedValue<String, Number> value, Font font) {
-        Matcher matcher = this.getMatcher(value.getValue(), "^cos\\((-?[0-9]+\\.?[0-9]*)(deg|grad)?\\)$");
+        Matcher matcher = this.getMatcher(value.getValue(), REGEX);
 
         // nonsensical input
         if (matcher == null) {

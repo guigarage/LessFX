@@ -11,6 +11,8 @@ import java.util.regex.Matcher;
  * @since 2015-01-11
  */
 public class CeilConverter extends LessStyleConverter<String, Integer> {
+    private final static String REGEX = "^ceil\\((-?[0-9]+.?[0-9]*)\\)$";
+
     private static class Holder {
         static final CeilConverter INSTANCE = new CeilConverter();
     }
@@ -25,7 +27,7 @@ public class CeilConverter extends LessStyleConverter<String, Integer> {
 
     @Override
     public Integer convert(ParsedValue<String, Integer> value, Font font) {
-        Matcher matcher = this.getMatcher(value.getValue(), "^ceil\\((-?[0-9]+.?[0-9]*)\\)$");
+        Matcher matcher = this.getMatcher(value.getValue(), REGEX);
         Number val;
 
         // nonsensical input
