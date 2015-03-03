@@ -18,7 +18,7 @@ public class RGBAConverterTest extends ColorDefinitionTest {
 
     @Override
     public void testInteger() {
-        String input = "rgba(128, 128, 128, 1.0)";
+        String input = "rgba(128, 128, 128, 50%)";
         ParsedValue<String, Color> value = new ParsedValueImpl<>(input, converter);
         Color result = converter.convert(value, null);
 
@@ -26,12 +26,12 @@ public class RGBAConverterTest extends ColorDefinitionTest {
         assertEquals("R integer", 0.5, result.getRed(), 0.01);
         assertEquals("G integer", 0.5, result.getGreen(), 0.01);
         assertEquals("B integer", 0.5, result.getBlue(), 0.01);
-        assertEquals("A integer", 1.0, result.getOpacity(), 0.01);
+        assertEquals("A integer", 0.5, result.getOpacity(), 0.01);
     }
 
     @Override
     public void testPercentage() {
-        String input = "rgba(50%, 50%, 50%, 1.0)";
+        String input = "rgba(50%, 50%, 50%, 0.5)";
         ParsedValue<String, Color> value = new ParsedValueImpl<>(input, converter);
         Color result = converter.convert(value, null);
 
@@ -39,7 +39,7 @@ public class RGBAConverterTest extends ColorDefinitionTest {
         assertEquals("R %", 0.5, result.getRed(), 0.01);
         assertEquals("G %", 0.5, result.getGreen(), 0.01);
         assertEquals("B %", 0.5, result.getBlue(), 0.01);
-        assertEquals("A %", 1.0, result.getOpacity(), 0.01);
+        assertEquals("A %", 0.5, result.getOpacity(), 0.01);
     }
 
     @Override

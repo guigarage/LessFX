@@ -12,7 +12,7 @@ import java.util.regex.Matcher;
  * @since 2015-03-03
  */
 public class RGBAConverter extends LessStyleConverter<String, Color> {
-    private final static String REGEX = "^rgba\\(([0-9]{1,3}%?),\\s*([0-9]{1,3}%?),\\s*([0-9]{1,3}%?),\\s*([0-1]\\.[0-9]*)\\)$";
+    private final static String REGEX = "^rgba\\(([0-9]{1,3}%?),\\s*([0-9]{1,3}%?),\\s*([0-9]{1,3}%?),\\s*((?:[0-1]\\.[0-9]*)|(?:[0-9]{1,3}%))\\)$";
 
     private static class Holder {
         static final RGBAConverter INSTANCE = new RGBAConverter();
@@ -49,8 +49,16 @@ public class RGBAConverter extends LessStyleConverter<String, Color> {
             }
         }
 
-        double alpha = Double.valueOf(matcher.group(4));
-        if (alpha > 1.0) {
+        double alpha;
+        String alphaS = matcher.group(4);
+
+        if (alphaS.charAt(alphaS.length() - 1) == '%') {
+            alpha = Double.valueOf(alphaS.substring(0, alphaS.length() - 1)) / 100;
+        } else {
+            alpha = Double.valueOf(alphaS);
+        }
+
+        if (alpha > 1) {
             return null;
         }
 
