@@ -9,20 +9,20 @@ import java.util.regex.Matcher;
 
 /**
  * @author Robin Küster
- * @since 2015-03-03
+ * @since 2015-03-04
  */
-public class HSLConverter extends LessStyleConverter<String, Color> {
-    private final static String REGEX = "^hsl\\(([0-9]{1,3}),\\s*((?:[0-1]\\.[0-9]*)|(?:[0-9]{1,3}%)),\\s*((?:[0-1]\\.[0-9]*)|(?:[0-9]{1,3}%))\\)$";
+public class HSLAConverter extends LessStyleConverter<String, Color> {
+    private final static String REGEX = "^hsla\\(([0-9]{1,3}),\\s*((?:[0-1]\\.[0-9]*)|(?:[0-9]{1,3}%)),\\s*((?:[0-1]\\.[0-9]*)|(?:[0-9]{1,3}%)),\\s*((?:[0-1]\\.[0-9]*)|(?:[0-9]{1,3}%))\\)$";
 
     private static class Holder {
-        static final HSLConverter INSTANCE = new HSLConverter();
+        static final HSLAConverter INSTANCE = new HSLAConverter();
     }
 
-    public static HSLConverter getInstance() {
+    public static HSLAConverter getInstance() {
         return Holder.INSTANCE;
     }
 
-    public HSLConverter() {
+    public HSLAConverter() {
 
     }
 
@@ -90,7 +90,19 @@ public class HSLConverter extends LessStyleConverter<String, Color> {
 
         double m = color[1] - 0.5 * c;
 
-        return new Color(r + m, g + m, b + m, 1.0);
+        String alphaS = matcher.group(4);
+        double alpha;
+
+        if (alphaS.charAt(alphaS.length() - 1) == '%') {
+            alpha = Double.valueOf(alphaS.substring(0, alphaS.length() - 1)) / 100;
+        } else {
+            alpha = Double.valueOf(alphaS);
+        }
+
+        if (alpha > 1.0) {
+            return null;
+        }
+
+        return new Color(r + m, g + m, b + m, alpha);
     }
 }
-
