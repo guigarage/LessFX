@@ -16,23 +16,23 @@ import java.util.regex.Matcher;
  * @author Robin Küster
  * @since 2015-03-06
  */
-public class ImageSizeConverter extends LessStyleConverter<String, Size[]> {
-    private final static String REGEX = "^image-size\\(\\\"(.*)\"\\)$";
+public class ImageHeightConverter extends LessStyleConverter<String, Size> {
+    private final static String REGEX = "^image-height\\(\\\"(.*)\"\\)$";
 
     private static class Holder {
-        static final ImageSizeConverter INSTANCE = new ImageSizeConverter();
+        static final ImageHeightConverter INSTANCE = new ImageHeightConverter();
     }
 
-    public static ImageSizeConverter getInstance() {
+    public static ImageHeightConverter getInstance() {
         return Holder.INSTANCE;
     }
 
-    public ImageSizeConverter() {
+    public ImageHeightConverter() {
 
     }
 
     @Override
-    public Size[] convert(ParsedValue<String, Size[]> value, Font font) {
+    public Size convert(ParsedValue<String, Size> value, Font font) {
         Matcher matcher = this.getMatcher(value.getValue(), REGEX);
 
         // nonsensical input
@@ -49,14 +49,6 @@ public class ImageSizeConverter extends LessStyleConverter<String, Size[]> {
             return null;
         }
 
-        Size sizes[] = new Size[2];
-
-        //width
-        sizes[0] = new Size(reader.getWidth(), SizeUnits.PX);
-
-        //height
-        sizes[1] = new Size(reader.getHeight(), SizeUnits.PX);
-
-        return sizes;
+        return new Size(reader.getHeight(), SizeUnits.PX);
     }
 }
