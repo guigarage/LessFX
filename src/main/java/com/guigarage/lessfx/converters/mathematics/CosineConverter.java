@@ -1,6 +1,7 @@
 package com.guigarage.lessfx.converters.mathematics;
 
 import com.guigarage.lessfx.converters.LessStyleConverter;
+import com.sun.javafx.css.SizeUnits;
 import javafx.css.ParsedValue;
 import javafx.scene.text.Font;
 
@@ -33,13 +34,13 @@ public class CosineConverter extends LessStyleConverter<String, Number> {
         Double val = null;
 
         // no units or rad
-        if (matcher.group(2) == null || matcher.group(2).equals("rad")) {
+        if (matcher.group(2) == null || matcher.group(2).equals(SizeUnits.RAD.toString())) {
             val = Math.cos(Double.valueOf(matcher.group(1)));
-        } else if (matcher.group(2).equals("deg")) { // degrees
+        } else if (matcher.group(2).equals(SizeUnits.DEG.toString())) { // degrees
             val = Math.cos(Double.valueOf(matcher.group(1)) * (Math.PI / 180));
-        } else if (matcher.group(2).equals("grad")) { // gradient
+        } else if (matcher.group(2).equals(SizeUnits.GRAD.toString())) { // gradient
             val = Math.cos(Double.valueOf(matcher.group(1)) * (Math.PI / 200));
-        } else if (matcher.group(2).equals("turn")) {
+        } else if (matcher.group(2).equals(SizeUnits.TURN.toString())) {
             val = Math.cos(Double.valueOf(matcher.group(1)) * (2 * Math.PI));
         }
         return val;

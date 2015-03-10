@@ -42,6 +42,7 @@ public class RoundConverter extends LessStyleConverter<String, Number> {
         if (matcher.group(2).equals("") || matcher.group(2).equals("0")) {
             return Math.round(val);
         } else {
+            // Locale.UK is used to ensure a decimal point and nto a decimal comma.
             String strVal = String.format(Locale.UK ,"%."+String.valueOf(Integer.valueOf(matcher.group(2)) + 1)+"g%n", val);
             return Double.valueOf(strVal);
         }
