@@ -26,7 +26,7 @@ public class PiConverter extends LessStyleConverter<String, Number> {
     @Override
     public Number convert(ParsedValue<String, Number> value, Font font) {
         if (value.getValue().equals(REGEX)) {
-            return 3.141592653589793;
+            return Math.PI;
         } else {
             return null;
         }
