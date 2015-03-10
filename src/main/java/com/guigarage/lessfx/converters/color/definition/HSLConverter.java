@@ -54,6 +54,10 @@ public class HSLConverter extends LessStyleConverter<String, Color> {
             }
         }
 
+        /*
+        Algorithm for RGB to HSL conversion explained here: http://en.wikipedia.org/wiki/HSL_and_HSV#From_HSL
+         */
+
         double c = (1 - Math.abs(2*color[1] - 1)) * color[0];
         double h2 = h / 60;
         double x = c * (1-Math.abs((h2 % 2) - 1));
