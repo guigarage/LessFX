@@ -21,10 +21,6 @@ public class ArcSinusConverter extends LessStyleConverter<String, Number> {
         return Holder.INSTANCE;
     }
 
-    private ArcSinusConverter() {
-
-    }
-
     @Override
     public Number convert(ParsedValue<String, Number> value, Font font) {
         Matcher matcher = getMatcher(value.getValue(), REGEX);

@@ -11,7 +11,7 @@ public class CosineConverterTest extends MathematicsTest {
     private CosineConverter converter;
     @Before
     public void initialize() {
-        this.converter = (CosineConverter)CosineConverter.getInstance();
+        this.converter = CosineConverter.getInstance();
     }
 
     @Override

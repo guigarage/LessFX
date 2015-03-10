@@ -12,7 +12,7 @@ public class SinusConverterTest extends MathematicsTest {
     private SinusConverter converter;
     @Before
     public void initialize() {
-        this.converter = (SinusConverter)SinusConverter.getInstance();
+        this.converter = SinusConverter.getInstance();
     }
 
     @Test

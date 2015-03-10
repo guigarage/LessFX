@@ -22,10 +22,6 @@ public class RGBAConverter extends LessStyleConverter<String, Color> {
         return Holder.INSTANCE;
     }
 
-    public RGBAConverter() {
-
-    }
-
     @Override
     public Color convert(ParsedValue<String, Color> value, Font font) {
         Matcher matcher = getMatcher(value.getValue(), REGEX);

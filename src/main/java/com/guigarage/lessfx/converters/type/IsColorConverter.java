@@ -64,10 +64,6 @@ public class IsColorConverter extends LessStyleConverter<String, Boolean> {
         return Holder.INSTANCE;
     }
 
-    public IsColorConverter() {
-
-    }
-
     @Override
     public Boolean convert(ParsedValue<String, Boolean> value, Font font) {
         Matcher matcher = getMatcher(value.getValue(), REGEX1);

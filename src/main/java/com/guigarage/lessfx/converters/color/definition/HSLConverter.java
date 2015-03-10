@@ -22,10 +22,6 @@ public class HSLConverter extends LessStyleConverter<String, Color> {
         return Holder.INSTANCE;
     }
 
-    public HSLConverter() {
-
-    }
-
     @Override
     public Color convert(ParsedValue<String, Color> value, Font font) {
         Matcher matcher = getMatcher(value.getValue(), REGEX);

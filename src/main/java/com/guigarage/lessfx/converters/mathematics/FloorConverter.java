@@ -17,12 +17,8 @@ public class FloorConverter extends LessStyleConverter<String, Integer> {
         static final FloorConverter INSTANCE = new FloorConverter();
     }
 
-    public static LessStyleConverter<String, Integer> getInstance() {
+    public static FloorConverter getInstance() {
         return Holder.INSTANCE;
-    }
-    
-    public FloorConverter() {
-
     }
 
     @Override

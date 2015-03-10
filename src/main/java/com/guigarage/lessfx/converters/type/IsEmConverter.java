@@ -19,10 +19,6 @@ public class IsEmConverter extends LessStyleConverter<String, Boolean> {
         return Holder.INSTANCE;
     }
 
-    public IsEmConverter() {
-
-    }
-
     @Override
     public Boolean convert(ParsedValue<String, Boolean> value, Font font) {
         return getMatcher(value.getValue(), REGEX) != null;

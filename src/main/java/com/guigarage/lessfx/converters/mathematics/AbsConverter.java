@@ -22,10 +22,6 @@ public class AbsConverter extends LessStyleConverter<String, Size> {
         return Holder.INSTANCE;
     }
 
-    private AbsConverter() {
-
-    }
-
     @Override
     public Size convert(ParsedValue<String, Size> value, Font font) {
         Matcher matcher = this.getMatcher(value.getValue(), REGEX1+this.getUnitRegex()+REGEX2);

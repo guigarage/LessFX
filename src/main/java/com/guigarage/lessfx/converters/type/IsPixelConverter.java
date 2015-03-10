@@ -19,10 +19,6 @@ public class IsPixelConverter extends LessStyleConverter<String, Boolean> {
         return Holder.INSTANCE;
     }
 
-    public IsPixelConverter() {
-
-    }
-
     @Override
     public Boolean convert(ParsedValue<String, Boolean> value, Font font) {
         return getMatcher(value.getValue(), REGEX) != null;

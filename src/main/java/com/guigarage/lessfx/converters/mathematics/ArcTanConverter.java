@@ -21,10 +21,6 @@ public class ArcTanConverter extends LessStyleConverter<String, Number> {
         return Holder.INSTANCE;
     }
 
-    private ArcTanConverter() {
-
-    }
-
     @Override
     public Number convert(ParsedValue<String, Number> value, Font font) {
         Matcher matcher = this.getMatcher(value.getValue(), REGEX);

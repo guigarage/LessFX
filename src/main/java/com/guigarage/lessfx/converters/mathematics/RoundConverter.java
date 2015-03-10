@@ -18,12 +18,8 @@ public class RoundConverter extends LessStyleConverter<String, Number> {
         static final RoundConverter INSTANCE = new RoundConverter();
     }
 
-    public static LessStyleConverter<String, Number> getInstance() {
+    public static RoundConverter getInstance() {
         return Holder.INSTANCE;
-    }
-    
-    private RoundConverter() {
-
     }
 
     @Override

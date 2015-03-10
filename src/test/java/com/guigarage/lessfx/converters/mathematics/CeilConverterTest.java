@@ -12,7 +12,7 @@ public class CeilConverterTest extends MathematicsTest {
 
     @Before
     public void initialize() {
-        this.converter = (CeilConverter)CeilConverter.getInstance();
+        this.converter = CeilConverter.getInstance();
     }
 
     @Override

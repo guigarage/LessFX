@@ -23,10 +23,6 @@ public class TanConverter extends LessStyleConverter<String, Number> {
         return Holder.INSTANCE;
     }
 
-    private TanConverter() {
-
-    }
-
     @Override
     public Number convert(ParsedValue<String, Number> value, Font font) {
         Matcher matcher = this.getMatcher(value.getValue(), REGEX1+this.getUnitRegex()+REGEX2);

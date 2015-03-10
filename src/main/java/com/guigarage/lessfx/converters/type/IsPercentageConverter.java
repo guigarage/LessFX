@@ -19,10 +19,6 @@ public class IsPercentageConverter extends LessStyleConverter<String, Boolean> {
         return Holder.INSTANCE;
     }
 
-    public IsPercentageConverter() {
-
-    }
-
     @Override
     public Boolean convert(ParsedValue<String, Boolean> value, Font font) {
         return getMatcher(value.getValue(), REGEX) != null;

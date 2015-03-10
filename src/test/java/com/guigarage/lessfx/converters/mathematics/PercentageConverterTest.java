@@ -13,7 +13,7 @@ public class PercentageConverterTest extends MathematicsTest {
 
     @Before
     public void initialize() {
-        converter = (PercentageConverter)PercentageConverter.getInstance();
+        converter = PercentageConverter.getInstance();
     }
 
     @Test

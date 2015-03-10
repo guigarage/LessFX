@@ -22,10 +22,6 @@ public class GetUnitConverter extends LessStyleConverter<String, SizeUnits> {
         return Holder.INSTANCE;
     }
 
-    public GetUnitConverter() {
-
-    }
-
     @Override
     public SizeUnits convert(ParsedValue<String, SizeUnits> value, Font font) {
         Matcher matcher = this.getMatcher(value.getValue(), REGEX);

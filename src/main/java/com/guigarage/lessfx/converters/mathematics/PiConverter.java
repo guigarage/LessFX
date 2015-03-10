@@ -15,7 +15,7 @@ public class PiConverter extends LessStyleConverter<String, Number> {
         static final PiConverter INSTANCE = new PiConverter();
     }
 
-    public static LessStyleConverter<String, Number> getInstance() {
+    public static PiConverter getInstance() {
         return Holder.INSTANCE;
     }
     

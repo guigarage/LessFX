@@ -17,12 +17,8 @@ public class CeilConverter extends LessStyleConverter<String, Integer> {
         static final CeilConverter INSTANCE = new CeilConverter();
     }
 
-    public static LessStyleConverter<String, Integer> getInstance() {
+    public static CeilConverter getInstance() {
         return Holder.INSTANCE;
-    }
-    
-    private CeilConverter() {
-
     }
 
     @Override

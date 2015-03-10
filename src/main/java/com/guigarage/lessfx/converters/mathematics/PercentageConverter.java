@@ -18,12 +18,8 @@ public class PercentageConverter extends LessStyleConverter<String, String> {
         static final PercentageConverter INSTANCE = new PercentageConverter();
     }
 
-    public static LessStyleConverter<String, String> getInstance() {
+    public static PercentageConverter getInstance() {
         return Holder.INSTANCE;
-    }
-    
-    private PercentageConverter() {
-
     }
 
     @Override

@@ -27,10 +27,6 @@ public class ImageHeightConverter extends LessStyleConverter<String, Size> {
         return Holder.INSTANCE;
     }
 
-    public ImageHeightConverter() {
-
-    }
-
     @Override
     public Size convert(ParsedValue<String, Size> value, Font font) {
         Matcher matcher = this.getMatcher(value.getValue(), REGEX);

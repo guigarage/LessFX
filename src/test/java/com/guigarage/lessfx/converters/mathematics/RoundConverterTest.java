@@ -13,7 +13,7 @@ public class RoundConverterTest extends MathematicsTest{
 
     @Before
     public void initialize() {
-        this.converter = (RoundConverter)RoundConverter.getInstance();
+        this.converter = RoundConverter.getInstance();
     }
 
     @Test

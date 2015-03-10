@@ -17,12 +17,8 @@ public class SinusConverter extends LessStyleConverter<String, Number> {
         static final SinusConverter INSTANCE = new SinusConverter();
     }
 
-    public static LessStyleConverter<String, Number> getInstance() {
+    public static SinusConverter getInstance() {
         return Holder.INSTANCE;
-    }
-    
-    private SinusConverter() {
-
     }
 
     @Override

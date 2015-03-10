@@ -19,12 +19,8 @@ public class SqrtConverter extends LessStyleConverter<String, Size> {
         static final SqrtConverter INSTANCE = new SqrtConverter();
     }
 
-    public static LessStyleConverter<String, Size> getInstance() {
+    public static SqrtConverter getInstance() {
         return Holder.INSTANCE;
-    }
-
-    private SqrtConverter() {
-
     }
 
     @Override

@@ -14,7 +14,7 @@ public class SqrtConverterTest extends MathematicsTest {
 
     @Before
     public void initialize() {
-        converter = (SqrtConverter)SqrtConverter.getInstance();
+        converter = SqrtConverter.getInstance();
     }
 
     @Test

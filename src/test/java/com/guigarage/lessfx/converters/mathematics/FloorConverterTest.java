@@ -12,7 +12,7 @@ public class FloorConverterTest extends MathematicsTest {
 
     @Before
     public void initialize() {
-        this.converter = (FloorConverter)FloorConverter.getInstance();
+        this.converter = FloorConverter.getInstance();
     }
 
     @Override

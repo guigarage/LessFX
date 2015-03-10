@@ -12,7 +12,7 @@ public class PiConverterTest extends MathematicsTest {
 
     @Before
     public void initialization() {
-        this.converter = (PiConverter)PiConverter.getInstance();
+        this.converter = PiConverter.getInstance();
     }
 
     @Override

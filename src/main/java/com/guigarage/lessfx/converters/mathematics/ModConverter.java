@@ -24,10 +24,6 @@ public class ModConverter extends LessStyleConverter<String, Size> {
         return Holder.INSTANCE;
     }
 
-    private ModConverter() {
-
-    }
-
     @Override
     public Size convert(ParsedValue<String, Size> value, Font font) {
         Matcher matcher = this.getMatcher(value.getValue(), REGEX1+this.getUnitRegex()+REGEX2+this.getUnitRegex()+REGEX3);

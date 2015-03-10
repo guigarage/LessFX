@@ -17,13 +17,10 @@ public class CosineConverter extends LessStyleConverter<String, Number> {
         static final CosineConverter INSTANCE = new CosineConverter();
     }
 
-    public static LessStyleConverter<String, Number> getInstance() {
+    public static CosineConverter getInstance() {
         return Holder.INSTANCE;
     }
 
-    private CosineConverter() {
-
-    }
 
     @Override
     public Number convert(ParsedValue<String, Number> value, Font font) {
