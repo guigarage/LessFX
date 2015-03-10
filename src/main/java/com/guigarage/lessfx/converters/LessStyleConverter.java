@@ -10,8 +10,8 @@ import java.util.regex.Pattern;
  * @author Robin Küster
  * @since 2015-01-14
  */
-public class LessStyleConverter<F, T> extends StyleConverter<F, T> {
-    public LessStyleConverter() {
+public abstract class LessStyleConverter<F, T> extends StyleConverter<F, T> {
+    protected LessStyleConverter() {
         super();
     }
 
