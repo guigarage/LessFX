@@ -54,7 +54,7 @@ public class IsColorConverter extends LessStyleConverter<String, Boolean> {
     }));
 
     private final static String REGEX1 = "^iscolor\\((.*)\\)$";
-    private final static String REGEX2 = "#([0-9a-zA-Z]{3}|[0-9a-zA-Z]{6})";
+    private final static String REGEX2 = "#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})";
 
     private static class Holder {
         static final IsColorConverter INSTANCE = new IsColorConverter();
