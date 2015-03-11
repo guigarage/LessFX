@@ -5,9 +5,50 @@ import com.sun.javafx.css.ParsedValueImpl;
 import javafx.css.ParsedValue;
 import org.junit.Before;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class IsColorConverterTest extends TypeConverterTest {
+    private final static String[] predefined = new String[]{
+            "aliceblue", "antiquewhite", "aqua", "aquamarine",
+            "azure", "beige", "bisque", "black",
+            "blanchedalmond", "blue", "blueviolet", "brown",
+            "burlywood", "cadetblue", "chartreuse", "chocolate",
+            "coral", "cornflowerblue", "cornsilk", "crimson",
+            "cyan", "darkblue", "darkcyan", "darkgoldenrod",
+            "darkgray", "darkgreen", "darkgrey", "darkkhaki",
+            "darkmagenta", "darkolivegreen", "darkorange", "darkorchid",
+            "darkred", "darksalmon", "darkseagreen", "darkslateblue",
+            "darkslategray", "darkslategrey", "darkturquoise", "darkviolet",
+            "deeppink", "deepskyblue", "dimgray", "dimgrey",
+            "dodgerblue", "firebrick", "floralwhite", "forestgreen",
+            "fuchsia", "gainsboro", "ghostwhite", "gold",
+            "goldenrod", "gray", "green", "greenyellow",
+            "grey", "honeydew", "hotpink", "indianred",
+            "indigo", "ivory", "khaki", "lavender",
+            "lavenderblush", "lawngreen", "lemonchiffon", "lightblue",
+            "lightcoral", "lightcyan", "lightgoldenrodyellow", "lightgray",
+            "lightgreen", "lightgrey", "lightpink", "lightsalmon",
+            "lightseagreen", "lightskyblue", "lightslategray", "lightslategrey",
+            "lightsteelblue", "lightyellow", "lime", "limegreen",
+            "linen", "magenta", "maroon", "mediumaquamarine",
+            "mediumblue", "mediumorchid", "mediumpurple", "mediumseagreen",
+            "mediumslateblue", "mediumspringgreen", "mediumturquoise", "mediumvioletred",
+            "midnightblue", "mintcream", "mistyrose", "moccasin",
+            "navajowhite", "navy", "oldlace", "olive",
+            "olivedrab", "orange", "orangered", "orchid",
+            "palegoldenrod", "palegreen", "paleturquoise", "palevioletred",
+            "papayawhip", "peachpuff", "peru", "pink",
+            "plum", "powderblue", "purple", "red",
+            "rosybrown", "royalblue", "saddlebrown", "salmon",
+            "sandybrown", "seagreen", "seashell", "sienna",
+            "silver", "skyblue", "slateblue", "slategray",
+            "slategrey", "snow", "springgreen", "steelblue",
+            "tan", "teal", "thistle", "tomato",
+            "turquoise", "violet", "wheat", "white",
+            "whitesmoke", "yellow", "yellowgreen", "transparent"
+    };
+
     private IsColorConverter converter;
 
     @Before
@@ -32,11 +73,13 @@ public class IsColorConverterTest extends TypeConverterTest {
 
     @Override
     public void testColorKeyword() {
-        String input = "iscolor(blue)";
-        ParsedValue<String, Boolean> value = new ParsedValueImpl<>(input, converter);
-        boolean result = converter.convert(value, null);
+        for (String s : predefined) {
+            String input = "iscolor("+s+")";
+            ParsedValue<String, Boolean> value = new ParsedValueImpl<>(input, converter);
+            boolean result = converter.convert(value, null);
 
-        assertTrue("Keyword color", result);
+            assertTrue("Keyword color: "+s, result);
+        }
     }
 
     @Override
