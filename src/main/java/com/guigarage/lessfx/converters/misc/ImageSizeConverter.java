@@ -41,7 +41,7 @@ public class ImageSizeConverter extends LessStyleConverter<String, Size[]> {
             File file = new File(matcher.group(1));
             reader = ImageIO.read(file);
         } catch (IOException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
             return null;
         }
 
