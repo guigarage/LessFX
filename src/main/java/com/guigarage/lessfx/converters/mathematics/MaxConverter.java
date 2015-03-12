@@ -10,15 +10,15 @@ import java.util.regex.Matcher;
  * @author Robin Küster
  * @since 2015-03-12
  */
-public class MinConverter extends LessStyleConverter<String, Number> {
-    private final static String REGEX1 = "^min\\((.+)\\)$";
+public class MaxConverter extends LessStyleConverter<String, Number> {
+    private final static String REGEX1 = "^max\\((.+)\\)$";
     private final static String REGEX2 = "^(\\-?[0-9]+\\.*[0-9]*)$";
 
     private static class Holder {
-        static final MinConverter INSTANCE = new MinConverter();
+        static final MaxConverter INSTANCE = new MaxConverter();
     }
 
-    public static MinConverter getInstance() {
+    public static MaxConverter getInstance() {
         return Holder.INSTANCE;
     }
 
@@ -32,7 +32,7 @@ public class MinConverter extends LessStyleConverter<String, Number> {
 
         String values[] = matcher.group(1).replaceAll("\\s", "").split(",");
 
-        double min = Double.POSITIVE_INFINITY;
+        double max = Double.NEGATIVE_INFINITY;
 
         for (String s : values) {
             matcher = this.getMatcher(s, REGEX2);
@@ -41,11 +41,11 @@ public class MinConverter extends LessStyleConverter<String, Number> {
                 return null;
             }
 
-            if (Double.parseDouble(s) < min) {
-                min = Double.parseDouble(s);
+            if (Double.parseDouble(s) > max) {
+                max = Double.parseDouble(s);
             }
         }
 
-        return min;
+        return max;
     }
 }
