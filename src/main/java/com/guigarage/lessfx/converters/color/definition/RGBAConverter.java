@@ -9,19 +9,38 @@ import java.util.regex.Matcher;
 
 /**
  * @author Robin Küster
+ * @version 1.0-SNAPSHOT
  * @since 2015-03-03
  */
 public class RGBAConverter extends LessStyleConverter<String, Color> {
+    /**
+     * Regular Expression to parse the function call.
+     */
     private final static String REGEX = "^rgba\\(([0-9]{1,3}%?),\\s*([0-9]{1,3}%?),\\s*([0-9]{1,3}%?),\\s*((?:[0-1]\\.[0-9]*)|(?:[0-9]{1,3}%))\\)$";
 
+    /**
+     * Initialization-on-demand holder
+     */
     private static class Holder {
         static final RGBAConverter INSTANCE = new RGBAConverter();
     }
 
+    /**
+     * Instance of the converter that got initialize in the Holder.
+     *
+     * @return Instance of the converter.
+     */
     public static RGBAConverter getInstance() {
         return Holder.INSTANCE;
     }
 
+    /**
+     * Converts the given CSS function call to a Java object.
+     *
+     * @param value ParsedValue containing the function call
+     * @param font Font used for functions that depend on the font size
+     * @return The result of the function call as a Java object or null if function call failed
+     */
     @Override
     public Color convert(ParsedValue<String, Color> value, Font font) {
         Matcher matcher = getMatcher(value.getValue(), REGEX);
