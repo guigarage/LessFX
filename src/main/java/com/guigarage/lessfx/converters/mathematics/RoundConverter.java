@@ -16,7 +16,7 @@ public class RoundConverter extends LessStyleConverter<String, Number> {
     /**
      * Regular Expression to parse the function call.
      */
-    private final static String REGEX = "^round\\((-?[0-9]+.?[0-9]*),?\\s?([0-9]*)\\)$";
+    private final static String REGEX = "^round\\((-?[0-9]+\\.?[0-9]*),?\\s?([0-9]*)\\)$";
 
     /**
      * Initialization-on-demand holder

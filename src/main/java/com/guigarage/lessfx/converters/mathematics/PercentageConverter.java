@@ -16,7 +16,7 @@ public class PercentageConverter extends LessStyleConverter<String, String> {
     /**
      * Regular Expression to parse the function call.
      */
-    private final static String REGEX = "^percentage\\((-?[0-9]+.?[0-9]*)\\)$";
+    private final static String REGEX = "^percentage\\((-?[0-9]+\\.?[0-9]*)\\)$";
 
     /**
      * Initialization-on-demand holder

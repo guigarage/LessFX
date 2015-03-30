@@ -15,7 +15,7 @@ public class FloorConverter extends LessStyleConverter<String, Integer> {
     /**
      * Regular Expression to parse the function call.
      */
-    private final static String REGEX = "^floor\\((-?[0-9]+.?[0-9]*)\\)$";
+    private final static String REGEX = "^floor\\((-?[0-9]+\\.?[0-9]*)\\)$";
 
     /**
      * Initialization-on-demand holder
