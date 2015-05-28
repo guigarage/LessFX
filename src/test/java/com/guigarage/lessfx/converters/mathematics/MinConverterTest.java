@@ -76,7 +76,8 @@ public class MinConverterTest extends MathematicsTest {
         ParsedValue<String, Number> value = new ParsedValueImpl<>(input, converter);
         Number result = converter.convert(value, null);
 
-        assertNull(result);
+        assertNotNull(result);
+        assertEquals(-3.0, result);
     }
 
     @Override

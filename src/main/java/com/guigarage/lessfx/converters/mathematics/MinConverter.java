@@ -4,6 +4,7 @@ import com.guigarage.lessfx.converters.LessStyleConverter;
 import javafx.css.ParsedValue;
 import javafx.scene.text.Font;
 
+import java.util.DoubleSummaryStatistics;
 import java.util.regex.Matcher;
 
 /**
@@ -20,7 +21,7 @@ public class MinConverter extends LessStyleConverter<String, Number> {
     /**
      * 2nd part of the regular expression to parse the function call.
      */
-    private final static String REGEX2 = "^(\\-?[0-9]+\\.*[0-9]*)$";
+    private final static String REGEX2 = "(?:(-?[0-9]+(?:\\.[0-9]*)?)(?:,\\s)?)";
 
     /**
      * Initialization-on-demand holder
@@ -53,21 +54,31 @@ public class MinConverter extends LessStyleConverter<String, Number> {
             return null;
         }
 
-        String values[] = matcher.group(1).replaceAll("\\s", "").split(",");
+        // The parameters of the function
+        String numbers = matcher.group(1);
 
+        // setting the initial value to the biggest possible double value to ensure that the first parameter is
+        // also the first one the others are compared to
         double min = Double.POSITIVE_INFINITY;
 
-        for (String s : values) {
-            matcher = this.getMatcher(s, REGEX2);
+        // matcher for the parameters. It matches the parameter one by one
+        matcher = this.getMatcher(numbers, REGEX2);
 
-            if (matcher == null) {
-                return null;
-            }
-
-            if (Double.parseDouble(s) < min) {
-                min = Double.parseDouble(s);
-            }
+        // check if parameter list isn't invalid.
+        if (matcher == null) {
+            return null;
         }
+
+        do {
+            // get parameter as string
+            String stringValue = matcher.group(1);
+
+            // convert to double
+            double val = Double.parseDouble(stringValue);
+
+            // check if below last found minimum
+            if (val < min) min = val;
+        } while (matcher.find()); // check for next parameter
 
         return min;
     }
